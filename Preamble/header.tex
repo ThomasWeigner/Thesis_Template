@@ -340,19 +340,6 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.8}
 
-%TODO this doesn't fucking work
-%---externalize plots for speed up
-%\usepgfplotslibrary{external}					% externally do the jobs (shell escape needs to be enabled)
-%\tikzexternalize[prefix=./Figures/]				% externalize and save figures in Figures				
-%%\tikzset{external/force remake}
-%
-%%---exclude todo pictures from externalize
-%\usepackage{letltxmacro}
-%\LetLtxMacro{\oldmissingfigure}{\missingfigure}
-%\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
-%\LetLtxMacro{\oldtodo}{\todo}
-%\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
-%
 %%---global plots settings
 %\pgfplotsset{legend style={overlay}, 			% set legends etc. as overlay to horizontaly align accoording to the axes
 %			 ylabel style={overlay},
