@@ -176,7 +176,7 @@
 %BEGIN_FOLD
 % ********************************* Fonts **************************************
 %BEGIN_FOLD
-\usepackage[eulergreek]{sansmath}		% to offer sans-serif in mathematics environment in the absence of proper sans maths fonts
+\usepackage[eulergreek]{sansmath}		% to offer sans-serif in mathematics environment in the absence of proper sans maths fonts	
 \usepackage{lmodern}
 %END_FOLD
 
@@ -287,6 +287,19 @@
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{cloud} = [draw, ellipse,fill=purple!20, node distance=3cm,minimum height=2em]
 
+%---externalize plots for speed up
+\usetikzlibrary{external}							
+\tikzexternalize									% externally do the jobs (shell escape needs to be enabled)
+\tikzsetexternalprefix{Figures/}					% externalize and save figures in Figures
+%---exclude todo pictures from externalize
+\usepackage{letltxmacro}
+\LetLtxMacro{\oldmissingfigure}{\missingfigure}
+\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
+\LetLtxMacro{\oldtodo}{\todo}
+\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
+%show plots in draft mode
+\pgfkeys{/pgf/images/include external/.code=\includegraphics{#1}}
+
 %---additional pin anchors
 %BEGIN_FOLD
 %\makeatletter
@@ -327,19 +340,6 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.8}
 
-%TODO this doesn't fucking work
-%---externalize plots for speed up
-%\usepgfplotslibrary{external}					% externally do the jobs (shell escape needs to be enabled)
-%\tikzexternalize[prefix=./Figures/]				% externalize and save figures in Figures				
-%%\tikzset{external/force remake}
-%
-%%---exclude todo pictures from externalize
-%\usepackage{letltxmacro}
-%\LetLtxMacro{\oldmissingfigure}{\missingfigure}
-%\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[{#1}]{#2}\tikzexternalenable}
-%\LetLtxMacro{\oldtodo}{\todo}
-%\renewcommand{\todo}[2][]{\tikzexternaldisable\oldtodo[#1]{#2}\tikzexternalenable}
-%
 %%---global plots settings
 %\pgfplotsset{legend style={overlay}, 			% set legends etc. as overlay to horizontaly align accoording to the axes
 %			 ylabel style={overlay},
